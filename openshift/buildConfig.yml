@@ -1,0 +1,41 @@
+---
+apiVersion: v1
+kind: Template
+metadata:
+  name: build-config-template
+objects:
+  - apiVersion: v1
+    kind: BuildConfig
+    metadata:
+      labels:
+        app: sample-rest-service
+      name: sample-rest-service
+    spec:
+      output:
+        pushSecret:
+          # TODO: RENAME THIS SECRET
+          name: quay-pull-secret
+        to:
+          kind: DockerImage
+          name: ${IMAGE_REGISTRY_URL}/${IMAGE_NAMESPACE}/sample-rest-service:${IMAGE_TAG}
+      runPolicy: Serial
+      source:
+        type: Binary
+      strategy:
+        dockerStrategy:
+          dockerfilePath: ./Dockerfile
+        type: Docker
+      triggers: []
+parameters:
+  - name: IMAGE_NAMESPACE
+    displayName: Namespace (Openshift project)
+    description: Openshift project this application resides in
+    required: true
+  - name: IMAGE_REGISTRY_URL
+    displayName: Docker Repo URL
+    description: Docker repository URL
+    required: true
+  - name: IMAGE_TAG
+    displayName: Image tag
+    description: Image tag
+    required: true
