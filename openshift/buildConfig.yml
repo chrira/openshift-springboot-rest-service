@@ -12,9 +12,6 @@ objects:
       name: sample-rest-service
     spec:
       output:
-        pushSecret:
-          # TODO: RENAME THIS SECRET
-          name: quay-pull-secret
         to:
           kind: DockerImage
           name: ${IMAGE_REGISTRY_URL}/${IMAGE_NAMESPACE}/sample-rest-service:${IMAGE_TAG}
