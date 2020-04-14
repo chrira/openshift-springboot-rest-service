@@ -1,0 +1,42 @@
+{
+	"info": {
+		"_postman_id": "5e5bfe3c-8b46-4d05-a4ab-49f94c1e961f",
+		"name": "sample-rest-service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "greeting",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "aade213b-73b9-4c27-8bd2-4bb45ba5f920",
+						"exec": [
+							"pm.test(\"success status\", () => pm.response.to.be.success );",
+							"pm.test(\"content is correct\", () => ",
+							"  pm.expect(pm.response.json().content).to.equal(\"Hello, World!\"));",
+							"pm.test(\"id was assigned\", () => ",
+							"  pm.expect(pm.response.json().id).to.be.not.null );"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://sample-rest-service-{{namespace}}.{{subdomain}}/greeting",
+					"protocol": "http",
+					"host": "sample-rest-service-{{namespace}}.{{subdomain}}",
+					"path": [
+						"greeting"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
